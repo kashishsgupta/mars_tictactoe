@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<head>
+    <title>Tic-Tac-Toe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <script src="js/4x4.js"></script>
+    <link rel="stylesheet" href="dist/css/reset.css">
+    <link rel="stylesheet" href="dist/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=McLaren&display=swap" rel="stylesheet">
+    <style type="text/css">
+        body{
+            background-image: url(dist/assets/mars1.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+
+<body onload="newboard();">
+    <div class="navbar-container">
+        <a id="button-audio" onclick="audioFunction()" class=" nav-button">
+            <p id="icon-music" class="icon-2"><i class="fa fa-music"></i></p>
+        </a>
+        <a id="button" class="nav-button">
+            <p class="icon"><i class="fa fa-question"></i></p>
+        </a>
+        <a href="./about.html" class="nav-button">
+            <p class="icon"><i class="fa fa-gamepad"></i></p>
+        </a>
+        <a href="./index.html" class="nav-button">
+            <p class="icon"><i class="fa fa-home"></i></p>
+        </a>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 class="subtitle">How to Play</h1>
+            <hr class="line">
+            <div class="how-to-content">
+                <p><span class="bold">1. Select the board. First, you must choose the game board, which consists of 3 x 3, 4 x 4, or 5 x 5 square blocks. In How to Play here, we will focus on the 3 x 3 grid.</p>
+                <p><span class="bold">2. Let the first player play first. Although traditionally, the first player plays with "X", you can allow the first player to determine whether he wants to play "X" or "O". These symbols will be drawn on the table, in an attempt to draw the same three symbols in a row. If you become the first player, "the best step you can take is to draw your symbol in the middle box." This will maximize your chances of winning, because you will be able to make a series of three "X" or "O" in more combinations (4) this way than if you chose a different box.</p>
+                <p><span class="bold">3. Next, turn the second player to play. After the first player draws the symbol, the second player must draw the symbol, which will be different from the symbol used by the first player. The second player can try to block the first player from making three symbols in a row, or focus on making three symbols in one series himself. Ideally, a player can do both simultaneously.</p>
+                <p><span class="bold">4. Continue to take turns drawing each symbol until one of the players has drawn three symbols in a row or until no player can win. The player who first draws three of his symbols in a row, whether horizontally, vertically, or diagonally, becomes the winner of the game. However, if both players use the optimal strategy, chances are there will not be a winner because you will block each other's chances of making three symbols in a row.</p>
+                <p><span class="bold">5. Continue to practice. Contrary to popular belief, tic-tac-toe is not entirely a game of chance. There are several strategies that can help you optimize your abilities and make you an expert tic-tac-toe player. If you keep playing, you will soon learn all the tricks to make sure you win every game - or, at least, you will learn the tricks to make sure you never lose.</p>
+            </div>
+        </div>
+    </div>
+    <div class="content-container">
+        <h1 class="title-2">Tic-Tac-Toe</h1>
+        <div class="board-container">
+            <div class="board-size">
+                <div class="size">
+                    <button id="size3" onclick="function3()" class="button-size">3x3</button>
+                    <button id="size4" onclick="function4()" class="button-size">4x4</button>
+                    <button id="size5" onclick="function5()" class="button-size">5x5</button>
+                </div>
+            </div>
+            <div class="board-content">
+                <div class="row-board">
+                    <img class="tile" src="images/blank.png" onclick="makeMove(0)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(1)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(2)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(3)" />
+                </div>
+                <div class="row-board">
+                    <img class="tile" src="images/blank.png" onclick="makeMove(4)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(5)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(6)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(7)" />
+                </div>
+                <div class="row-board">
+                    <img class="tile" src="images/blank.png" onclick="makeMove(8)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(9)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(10)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(11)" />
+                </div>
+                <div class="row-board">
+                    <img class="tile" src="images/blank.png" onclick="makeMove(12)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(13)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(14)" />
+                    <img class="tile" src="images/blank.png" onclick="makeMove(15)" />
+                </div>
+                <input class="new-game" type="button" value="Replay" onclick="newboard()" />
+            </div>
+            <div class="info-game">
+                <p id="turnInfo"> TURN INFO </p>
+            </div>
+        </div>
+        <!--<img class="pohon-1" src="dist/assets/pohon-1.png" />
+        <img class="pohon-2" src="dist/assets/pohon-2.png" />
+        <img class="semak-2" src="dist/assets/semak-2.png" />-->
+    </div>
+    <p class=footer-text>&copy; Copyright 2019. All rights reserved.
+        <br>Darin Amanda - M. Fachry - M. Nadhirsyah - Roshani Ayu</p>
+    </p>
+    </div>
+    <audio id="myAudio" allow='autoplay' loop='loop' loop>
+        <source src="music/cublak.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</body>
+<script>
+    var modal = document.getElementById("modal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("button");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "flex";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    var x = document.getElementById("myAudio");
+    var checkAudio = true;
+    var property = document.getElementById("icon-music");
+    function audioFunction() {
+        if (checkAudio === true) {
+            property.style.color = "#F08732";
+            x.play();
+            checkAudio = false;
+        } else if (checkAudio === false) {
+            property.style.color = "#FFFFFF";
+            x.pause();
+            checkAudio = true;
+        }
+    }
+    function function3() {
+        let params = (new URL(document.location)).searchParams;
+        let name = params.get('name');
+        let level = params.get('level');
+        if (level === "very_easy"){
+            if (name === "computer") {
+                window.location.href = '3x3.html?name=computer&level=very_easy';
+            }else if (name === "human") {
+                window.location.href = '3x3.html?name=human&level=very_easy';
+            }
+        }
+        else if (level === "easy"){
+            if (name === "computer") {
+                window.location.href = '3x3.html?name=computer&level=easy';
+            }else if (name === "human") {
+                window.location.href = '3x3.html?name=human&level=easy';
+            }
+        }
+        else if (level === "medium"){
+            if (name === "computer") {
+                window.location.href = '3x3.html?name=computer&level=medium';
+            }else if (name === "human") {
+                window.location.href = '3x3.html?name=human&level=medium';
+            }
+        }
+        else {
+            if (name === "computer") {
+                window.location.href = '3x3.html?name=computer';
+            }else if (name === "human") {
+                window.location.href = '3x3.html?name=human';
+            }
+        }  
+    }
+    function function4() {
+        let params = (new URL(document.location)).searchParams;
+        let name = params.get('name');
+        let level = params.get('level');
+        if (level === "very_easy"){
+            if (name === "computer") {
+                window.location.href = '4x4.html?name=computer&level=very_easy';
+            }else if (name === "human") {
+                window.location.href = '4x4.html?name=human&level=very_easy';
+            }
+        }
+        else if (level === "easy"){
+            if (name === "computer") {
+                window.location.href = '4x4.html?name=computer&level=easy';
+            }else if (name === "human") {
+                window.location.href = '4x4.html?name=human&level=easy';
+            }
+        }
+        else if (level === "medium"){
+            if (name === "computer") {
+                window.location.href = '4x4.html?name=computer&level=medium';
+            }else if (name === "human") {
+                window.location.href = '4x4.html?name=human&level=medium';
+            }
+        }
+        else {
+            if (name === "computer") {
+                window.location.href = '4x4.html?name=computer';
+            }else if (name === "human") {
+                window.location.href = '4x4.html?name=human';
+            }
+        }  
+    }
+    function function5() {
+        let params = (new URL(document.location)).searchParams;
+        let name = params.get('name');
+        let level = params.get('level');
+        if (level === "very_easy"){
+            if (name === "computer") {
+                window.location.href = '5x5.html?name=computer&level=very_easy';
+            }else if (name === "human") {
+                window.location.href = '5x5.html?name=human&level=very_easy';
+            }
+        }
+        else if (level === "easy"){
+            if (name === "computer") {
+                window.location.href = '5x5.html?name=computer&level=easy';
+            }else if (name === "human") {
+                window.location.href = '5x5.html?name=human&level=easy';
+            }
+        }
+        else if (level === "medium"){
+            if (name === "computer") {
+                window.location.href = '5x5.html?name=computer&level=medium';
+            }else if (name === "human") {
+                window.location.href = '5x5.html?name=human&level=medium';
+            }
+        }
+        else {
+            if (name === "computer") {
+                window.location.href = '5x5.html?name=computer';
+            }else {
+                window.location.href = '5x5.html?name=human';
+            }
+        }  
+    }
+</script>
+
+</html>
