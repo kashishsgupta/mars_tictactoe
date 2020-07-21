@@ -1,15 +1,13 @@
 // board setting
-//let BLANK = new Image()
-
-let BOARD_SIZE = 9;
-module.exports.BOARD_SIZE=BOARD_SIZE;
+let BLANK = new Image()
+let BOARD_SIZE = 25;
 let NOT_OCCUPIED = ' ';
 let HUMAN = 'O';
 let COMPUTER = 'X';
 
-let board = new Array()
+let board = new Array();
 let choice;
-let active_turn = "";
+let active_turn = "HUMAN";
 let messages = ["It is a Tie",
     "Congratulations!You won",
     "You lose!"]
@@ -17,14 +15,15 @@ let messages = ["It is a Tie",
 let humanImgPath = './images/astro1.jpg';
 let computerImgPath = './images/astro2.jpg';
 
-//let humanImg = new Image()
-//let computerImg = new Image()
+let humanImg = new Image()
+let computerImg = new Image()
 
 let blank_src = './images/blank2.png'
 let blank_on_hover_src = './images/blank.png'
 
 humanImg.src = humanImgPath;
 computerImg.src = computerImgPath;
+
 
 let params = (new URL(document.location)).searchParams;
 let name = params.get('name');
@@ -65,8 +64,8 @@ function newboard() {
         };
     }
 
-    if (BOARD_SIZE == 9) {
-        document.getElementById("size3").disabled = true;;
+    if (BOARD_SIZE == 25) {
+        document.getElementById("size5").disabled = true;;
     }
 
     var turnInfo = document.getElementById("turnInfo");
@@ -81,7 +80,7 @@ function newboard() {
 }
 
 function makeMove(pieceMove) {
-
+    
     if(!validTurn()) {
         return 
     }
@@ -127,7 +126,7 @@ function gameScore(currentBoard, depth) {
         return depth - 10;
     } else if (score === 3) {
         return 10 - depth;
-    }else {
+    } else {
         return 0;
     }
 }
@@ -222,29 +221,29 @@ function getAvailableMoves(currentBoard) {
 //   3 if COMPUTER wins
 function checkWinningCondition(currentBoard) {
 
-    // checking for horizontal conditions
-    for (i = 0; i <= 6; i += 3) {
-        if (currentBoard[i] === HUMAN && currentBoard[i + 1] === HUMAN && currentBoard[i + 2] === HUMAN)
+    // checking for horizontal wins
+    for (i = 0; i <= 20; i += 5) {
+        if (currentBoard[i] === HUMAN && currentBoard[i + 1] === HUMAN && currentBoard[i + 2] === HUMAN && currentBoard[i + 3] === HUMAN && currentBoard[i + 4] === HUMAN)
             return 2;
-        if (currentBoard[i] === COMPUTER && currentBoard[i + 1] === COMPUTER && currentBoard[i + 2] === COMPUTER)
+        if (currentBoard[i] === COMPUTER && currentBoard[i + 1] === COMPUTER && currentBoard[i + 2] === COMPUTER && currentBoard[i + 3] === COMPUTER && currentBoard[i + 4] === COMPUTER)
             return 3;
     }
 
     // Check for vertical wins
-    for (i = 0; i <= 2; i++) {
-        if (currentBoard[i] === HUMAN && currentBoard[i + 3] === HUMAN && currentBoard[i + 6] === HUMAN)
+    for (i = 0; i <= 4; i++) {
+        if (currentBoard[i] === HUMAN && currentBoard[i + 5] === HUMAN && currentBoard[i + 10] === HUMAN && currentBoard[i + 15] === HUMAN && currentBoard[i + 20] === HUMAN)
             return 2;
-        if (currentBoard[i] === COMPUTER && currentBoard[i + 3] === COMPUTER && currentBoard[i + 6] === COMPUTER)
+        if (currentBoard[i] === COMPUTER && currentBoard[i + 5] === COMPUTER && currentBoard[i + 10] === COMPUTER && currentBoard[i + 15] === COMPUTER && currentBoard[i + 20] === COMPUTER)
             return 3;
     }
 
     // Check for diagonal wins
-    if ((currentBoard[0] === HUMAN && currentBoard[4] === HUMAN && currentBoard[8] === HUMAN) ||
-        (currentBoard[2] === HUMAN && currentBoard[4] === HUMAN && currentBoard[6] === HUMAN))
+    if ((currentBoard[0] === HUMAN && currentBoard[6] === HUMAN && currentBoard[12] === HUMAN && currentBoard[18] === HUMAN && currentBoard[24] === HUMAN) ||
+        (currentBoard[4] === HUMAN && currentBoard[8] === HUMAN && currentBoard[12] === HUMAN && currentBoard[16] === HUMAN && currentBoard[20] === HUMAN))
         return 2;
 
-    if ((currentBoard[0] === COMPUTER && currentBoard[4] === COMPUTER && currentBoard[8] === COMPUTER) ||
-        (currentBoard[2] === COMPUTER && currentBoard[4] === COMPUTER && currentBoard[6] === COMPUTER))
+    if ((currentBoard[0] === COMPUTER && currentBoard[6] === COMPUTER && currentBoard[12] === COMPUTER && currentBoard[18] === COMPUTER && currentBoard[24] === COMPUTER) ||
+        (currentBoard[4] === COMPUTER && currentBoard[8] === COMPUTER && currentBoard[12] === COMPUTER && currentBoard[16] === COMPUTER && currentBoard[20] === COMPUTER))
         return 3;
 
     // Check for tie
@@ -265,7 +264,7 @@ function isGameOver(board) {
         return false
     } else if (checkWinningCondition(board) === 1) {
         var turnInfo = document.getElementById("turnInfo");
-        tieSound.play()
+        tieSound.play();
         turnInfo.innerHTML = messages[0];
     } else if (checkWinningCondition(board) === 2) {
         var turnInfo = document.getElementById("turnInfo");
